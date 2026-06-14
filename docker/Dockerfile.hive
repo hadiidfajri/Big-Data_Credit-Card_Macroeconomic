@@ -1,0 +1,20 @@
+# ============================================================================
+# Custom Hive image for the Big Data project.
+# Extends apache/hive:4.0.0 and bakes in the PostgreSQL JDBC driver, which the
+# base image does not ship but the metastore needs to talk to its Postgres
+# backing DB. Used by both hive-metastore and hiveserver2.
+# Infra only — contains no pipeline code.
+# ============================================================================
+FROM apache/hive:4.0.0
+
+USER root
+
+# PostgreSQL JDBC driver onto the Hive classpath (metastore -> postgres).
+# COPY a host-downloaded jar (ADD <url> proved unreliable — produced a 0-byte file
+# due to a Maven Central redirect). Fetch it first into docker/ on the host:
+#   Invoke-WebRequest https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.4/postgresql-42.7.4.jar -OutFile docker/postgresql-42.7.4.jar
+COPY docker/postgresql-42.7.4.jar /opt/hive/lib/postgresql-42.7.4.jar
+
+RUN chmod 644 /opt/hive/lib/postgresql-42.7.4.jar
+
+USER hive

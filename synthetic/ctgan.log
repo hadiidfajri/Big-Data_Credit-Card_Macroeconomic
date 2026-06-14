@@ -1,0 +1,20 @@
+2026-06-10 02:50:28,268 | INFO    | synthetic.ctgan | === CTGAN synthesis (n=150000, epochs=10, seed=42, balance=False) ===
+2026-06-10 02:50:33,548 | INFO    | synthetic.ctgan | Seed rows=30000, target column='default payment next month'
+2026-06-10 02:50:33,622 | INFO    | synthetic.ctgan | [SYNTHETIC/ctgan] status=FAILED rows=None duration=5.35s peak_rss=681.1MB
+2026-06-10 02:51:57,157 | INFO    | synthetic.ctgan | === CTGAN synthesis (n=150000, epochs=10, seed=42, balance=False) ===
+2026-06-10 02:52:00,190 | INFO    | synthetic.ctgan | Seed rows=30000, target column='default payment next month'
+2026-06-10 02:55:29,678 | INFO    | synthetic.ctgan | [SYNTHETIC/ctgan] status=FAILED rows=None duration=212.53s peak_rss=523.9MB
+2026-06-10 02:56:47,704 | INFO    | synthetic.ctgan | === CTGAN synthesis (n=150000, epochs=10, seed=42, balance=False) ===
+2026-06-10 02:56:51,494 | INFO    | synthetic.ctgan | Seed rows=30000, target column='default payment next month'
+2026-06-10 02:59:30,920 | INFO    | synthetic.ctgan | Target class plan: {0: 116820, 1: 33180}
+2026-06-10 02:59:43,102 | INFO    | synthetic.ctgan | Wrote 150000 rows -> /app/synthetic/synthetic_credit_clients.csv | class balance={0: 0.7788, 1: 0.2212}
+2026-06-10 02:59:43,123 | INFO    | synthetic.ctgan | [SYNTHETIC/ctgan] status=OK rows=150000 duration=175.42s peak_rss=523.3MB
+2026-06-10 02:59:43,123 | INFO    | synthetic.ctgan | === CTGAN done ===
+2026-06-10 05:13:52,985 | INFO    | synthetic.ctgan | === CTGAN synthesis (n=150000, epochs=300, seed=42, balance=False) ===
+2026-06-10 05:13:58,709 | INFO    | synthetic.ctgan | Seed rows=30000, target column='default payment next month'
+2026-06-10 05:23:14,747 | INFO    | synthetic.ctgan | === CTGAN synthesis (n=150000, epochs=300, seed=42, balance=False) ===
+2026-06-10 05:23:20,017 | INFO    | synthetic.ctgan | Seed rows=30000, target column='default payment next month'
+2026-06-10 05:52:43,850 | INFO    | synthetic.ctgan | Target class plan: {0: 116820, 1: 33180}
+2026-06-10 05:53:07,637 | INFO    | synthetic.ctgan | Wrote 150000 rows -> /app/synthetic/synthetic_credit_clients.csv | class balance={0: 0.7788, 1: 0.2212}
+2026-06-10 05:53:07,664 | INFO    | synthetic.ctgan | [SYNTHETIC/ctgan] status=OK rows=150000 duration=1793.08s peak_rss=522.8MB
+2026-06-10 05:53:07,666 | INFO    | synthetic.ctgan | === CTGAN done ===

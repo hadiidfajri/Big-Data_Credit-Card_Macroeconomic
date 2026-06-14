@@ -1,0 +1,78 @@
+26/06/10 03:23:08 INFO SparkContext: Running Spark version 3.5.6
+26/06/10 03:23:08 INFO SparkContext: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 03:23:08 INFO SparkContext: Java version 17.0.15
+26/06/10 03:23:08 INFO ResourceUtils: ==============================================================
+26/06/10 03:23:08 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/06/10 03:23:08 INFO ResourceUtils: ==============================================================
+26/06/10 03:23:08 INFO SparkContext: Submitted application: dashboard-kpis
+26/06/10 03:23:08 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/06/10 03:23:08 INFO ResourceProfile: Limiting resource is cpu
+26/06/10 03:23:08 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/06/10 03:23:08 INFO SecurityManager: Changing view acls to: sparkuser,spark
+26/06/10 03:23:08 INFO SecurityManager: Changing modify acls to: sparkuser,spark
+26/06/10 03:23:08 INFO SecurityManager: Changing view acls groups to: 
+26/06/10 03:23:08 INFO SecurityManager: Changing modify acls groups to: 
+26/06/10 03:23:08 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: sparkuser, spark; groups with view permissions: EMPTY; users with modify permissions: sparkuser, spark; groups with modify permissions: EMPTY
+26/06/10 03:23:08 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/10 03:23:08 INFO Utils: Successfully started service 'sparkDriver' on port 43751.
+26/06/10 03:23:08 INFO SparkEnv: Registering MapOutputTracker
+26/06/10 03:23:08 INFO SparkEnv: Registering BlockManagerMaster
+26/06/10 03:23:08 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/10 03:23:08 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/10 03:23:08 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/06/10 03:23:08 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-34a6498b-74f9-4be8-a616-2f403a93a4cf
+26/06/10 03:23:08 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/06/10 03:23:08 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/10 03:23:09 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/06/10 03:23:09 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/10 03:23:09 INFO Executor: Starting executor ID driver on host 8ef5a0b9303c
+26/06/10 03:23:09 INFO Executor: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 03:23:09 INFO Executor: Java version 17.0.15
+26/06/10 03:23:09 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/06/10 03:23:09 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@481835c for default.
+26/06/10 03:23:09 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 36869.
+26/06/10 03:23:09 INFO NettyBlockTransferService: Server created on 8ef5a0b9303c:36869
+26/06/10 03:23:09 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/10 03:23:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 8ef5a0b9303c, 36869, None)
+26/06/10 03:23:09 INFO BlockManagerMasterEndpoint: Registering block manager 8ef5a0b9303c:36869 with 434.4 MiB RAM, BlockManagerId(driver, 8ef5a0b9303c, 36869, None)
+26/06/10 03:23:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 8ef5a0b9303c, 36869, None)
+26/06/10 03:23:09 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 8ef5a0b9303c, 36869, None)
+2026-06-10 03:23:09,624 | INFO    | dashboard.kpis | === Building dashboard KPI tables ===
+2026-06-10 03:23:09,658 | INFO    | dashboard.kpis | --- KPI statement 1 ---
+2026-06-10 03:23:11,801 | INFO    | dashboard.kpis | --- KPI statement 2 ---
+26/06/10 03:23:14 WARN SessionState: METASTORE_FILTER_HOOK will be ignored, since hive.security.authorization.manager is set to instance of HiveAuthorizerFactory.
+2026-06-10 03:23:14,447 | INFO    | dashboard.kpis | --- KPI statement 3 ---
+2026-06-10 03:23:14,468 | INFO    | dashboard.kpis | --- KPI statement 4 ---
+2026-06-10 03:23:15,989 | INFO    | dashboard.kpis | --- KPI statement 5 ---
+2026-06-10 03:23:16,016 | INFO    | dashboard.kpis | --- KPI statement 6 ---
+2026-06-10 03:23:17,578 | INFO    | dashboard.kpis | --- KPI statement 7 ---
+2026-06-10 03:23:17,595 | INFO    | dashboard.kpis | --- KPI statement 8 ---
+2026-06-10 03:23:18,083 | INFO    | dashboard.kpis | --- KPI statement 9 ---
+2026-06-10 03:23:18,097 | INFO    | dashboard.kpis | --- KPI statement 10 ---
+2026-06-10 03:23:18,339 | INFO    | dashboard.kpis | --- KPI statement 11 ---
+2026-06-10 03:23:18,354 | INFO    | dashboard.kpis | --- KPI statement 12 ---
+2026-06-10 03:23:18,664 | INFO    | dashboard.kpis | --- KPI statement 13 ---
+2026-06-10 03:23:18,678 | INFO    | dashboard.kpis | --- KPI statement 14 ---
+2026-06-10 03:23:19,009 | INFO    | dashboard.kpis | --- KPI statement 15 ---
+2026-06-10 03:23:19,022 | INFO    | dashboard.kpis | --- KPI statement 16 ---
+2026-06-10 03:23:19,485 | INFO    | dashboard.kpis | KPI tables in bigdata_etl:
++-----------+----------------------------+-----------+
+|namespace  |tableName                   |isTemporary|
++-----------+----------------------------+-----------+
+|bigdata_etl|kpi_overall                 |false      |
+|bigdata_etl|kpi_default_by_demographic  |false      |
+|bigdata_etl|kpi_monthly_default_vs_macro|false      |
+|bigdata_etl|kpi_corr_default_macro      |false      |
++-----------+----------------------------+-----------+
+
+2026-06-10 03:23:20,375 | INFO    | dashboard.kpis | KPI tables in bigdata_elt:
++-----------+----------------------------+-----------+
+|namespace  |tableName                   |isTemporary|
++-----------+----------------------------+-----------+
+|bigdata_elt|kpi_overall                 |false      |
+|bigdata_elt|kpi_default_by_demographic  |false      |
+|bigdata_elt|kpi_monthly_default_vs_macro|false      |
+|bigdata_elt|kpi_corr_default_macro      |false      |
++-----------+----------------------------+-----------+
+
+2026-06-10 03:23:20,496 | INFO    | dashboard.kpis | === Dashboard KPI tables built ===

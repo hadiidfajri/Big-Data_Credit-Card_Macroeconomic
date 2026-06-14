@@ -1,0 +1,4 @@
+# Dev/test dependencies (not baked into the Spark image).
+# Install:  pip install -r requirements-dev.txt
+pytest>=8,<9
+pytest-cov>=5,<7

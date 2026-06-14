@@ -1,0 +1,305 @@
+26/06/10 08:46:42 INFO SparkContext: Running Spark version 3.5.6
+26/06/10 08:46:42 INFO SparkContext: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 08:46:42 INFO SparkContext: Java version 17.0.15
+26/06/10 08:46:42 INFO ResourceUtils: ==============================================================
+26/06/10 08:46:42 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/06/10 08:46:42 INFO ResourceUtils: ==============================================================
+26/06/10 08:46:42 INFO SparkContext: Submitted application: etl-load
+26/06/10 08:46:42 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/06/10 08:46:42 INFO ResourceProfile: Limiting resource is cpu
+26/06/10 08:46:42 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/06/10 08:46:42 INFO SecurityManager: Changing view acls to: root,spark
+26/06/10 08:46:42 INFO SecurityManager: Changing modify acls to: root,spark
+26/06/10 08:46:42 INFO SecurityManager: Changing view acls groups to: 
+26/06/10 08:46:42 INFO SecurityManager: Changing modify acls groups to: 
+26/06/10 08:46:42 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root, spark; groups with view permissions: EMPTY; users with modify permissions: root, spark; groups with modify permissions: EMPTY
+26/06/10 08:46:42 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/10 08:46:42 INFO Utils: Successfully started service 'sparkDriver' on port 35095.
+26/06/10 08:46:42 INFO SparkEnv: Registering MapOutputTracker
+26/06/10 08:46:42 INFO SparkEnv: Registering BlockManagerMaster
+26/06/10 08:46:42 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/10 08:46:42 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/10 08:46:42 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/06/10 08:46:42 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-84bbb942-3553-4c39-a6a4-64be8086f521
+26/06/10 08:46:42 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/06/10 08:46:42 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/10 08:46:42 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/06/10 08:46:42 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/10 08:46:42 INFO Executor: Starting executor ID driver on host 2ec9f575afb8
+26/06/10 08:46:42 INFO Executor: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 08:46:42 INFO Executor: Java version 17.0.15
+26/06/10 08:46:42 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/06/10 08:46:42 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@5b88b49e for default.
+26/06/10 08:46:43 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 38695.
+26/06/10 08:46:43 INFO NettyBlockTransferService: Server created on 2ec9f575afb8:38695
+26/06/10 08:46:43 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/10 08:46:43 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 2ec9f575afb8, 38695, None)
+26/06/10 08:46:43 INFO BlockManagerMasterEndpoint: Registering block manager 2ec9f575afb8:38695 with 434.4 MiB RAM, BlockManagerId(driver, 2ec9f575afb8, 38695, None)
+26/06/10 08:46:43 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 2ec9f575afb8, 38695, None)
+26/06/10 08:46:43 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 2ec9f575afb8, 38695, None)
+2026-06-10 08:46:43,327 | INFO    | etl.load | === ETL Load started (db=bigdata_etl) ===
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 08:46:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 47.50% for 16 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:46:49 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 08:46:49 WARN SessionState: METASTORE_FILTER_HOOK will be ignored, since hive.security.authorization.manager is set to instance of HiveAuthorizerFactory.
+2026-06-10 08:46:50,518 | INFO    | etl.load | Loaded bigdata_etl.dim_client rows=150000 cols=15
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+2026-06-10 08:46:52,233 | INFO    | etl.load | Loaded bigdata_etl.dim_date rows=12 cols=7
+2026-06-10 08:46:54,186 | INFO    | etl.load | Loaded bigdata_etl.dim_macro rows=12 cols=12
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 47.50% for 16 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 44.71% for 17 writers
+26/06/10 08:46:55 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 42.22% for 18 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 44.71% for 17 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 47.50% for 16 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:46:56 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+2026-06-10 08:46:57,265 | INFO    | etl.load | Loaded bigdata_etl.fact_credit_monthly rows=900000 cols=22
+2026-06-10 08:46:57,283 | WARNING | etl.load | Constraint skipped ( pk_client PRIMARY KEY (): 
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CONSTRAINT'.(line 1, pos 39)
+
+== SQL ==
+ALTER TABLE bigdata_etl.dim_client ADD CONSTRAINT pk_client PRIMARY KEY (id) DISABLE NOVALIDATE RELY
+---------------------------------------^^^
+
+2026-06-10 08:46:57,297 | WARNING | etl.load | Constraint skipped ( pk_date PRIMARY KEY (da): 
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CONSTRAINT'.(line 1, pos 37)
+
+== SQL ==
+ALTER TABLE bigdata_etl.dim_date ADD CONSTRAINT pk_date PRIMARY KEY (date_key) DISABLE NOVALIDATE RELY
+-------------------------------------^^^
+
+2026-06-10 08:46:57,308 | WARNING | etl.load | Constraint skipped ( pk_macro PRIMARY KEY (d): 
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CONSTRAINT'.(line 1, pos 38)
+
+== SQL ==
+ALTER TABLE bigdata_etl.dim_macro ADD CONSTRAINT pk_macro PRIMARY KEY (date_key) DISABLE NOVALIDATE RELY
+--------------------------------------^^^
+
+2026-06-10 08:46:57,318 | WARNING | etl.load | Constraint skipped ( fk_fact_client FOREIGN ): 
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CONSTRAINT'.(line 1, pos 48)
+
+== SQL ==
+ALTER TABLE bigdata_etl.fact_credit_monthly ADD CONSTRAINT fk_fact_client FOREIGN KEY (id) REFERENCES bigdata_etl.dim_client(id) DISABLE NOVALIDATE RELY
+------------------------------------------------^^^
+
+2026-06-10 08:46:57,327 | WARNING | etl.load | Constraint skipped ( fk_fact_date FOREIGN KE): 
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CONSTRAINT'.(line 1, pos 48)
+
+== SQL ==
+ALTER TABLE bigdata_etl.fact_credit_monthly ADD CONSTRAINT fk_fact_date FOREIGN KEY (date_key) REFERENCES bigdata_etl.dim_date(date_key) DISABLE NOVALIDATE RELY
+------------------------------------------------^^^
+
+2026-06-10 08:46:57,340 | INFO    | etl.load | Running 8 analytical queries from etl_analytical_queries.sql
+2026-06-10 08:46:57,341 | INFO    | etl.load | --- Q1 ---
+SELECT ROUND(AVG(default_payment_next_month), 4) AS overall_default_rate,
+       COUNT(*)                                   AS total_clients
+FROM bigdata_etl.dim_client
++--------------------+-------------+
+|overall_default_rate|total_clients|
++--------------------+-------------+
+|0.2212              |150000       |
++--------------------+-------------+
+
+2026-06-10 08:46:58,444 | INFO    | etl.load | --- Q2 ---
+SELECT sex_label,
+       COUNT(*)                                   AS clients,
+       ROUND(AVG(default_payment_next_month), 4)  AS default_rate
+FROM bigdata_etl.dim_client
+GROUP BY sex_label
+ORDER BY default_rate DESC
++---------+-------+------------+
+|sex_label|clients|default_rate|
++---------+-------+------------+
+|female   |73941  |0.2439      |
+|male     |76059  |0.1991      |
++---------+-------+------------+
+
+2026-06-10 08:46:59,063 | INFO    | etl.load | --- Q3 ---
+SELECT education_label,
+       COUNT(*)                                   AS clients,
+       ROUND(AVG(default_payment_next_month), 4)  AS default_rate
+FROM bigdata_etl.dim_client
+GROUP BY education_label
+ORDER BY default_rate DESC
++---------------+-------+------------+
+|education_label|clients|default_rate|
++---------------+-------+------------+
+|university     |54000  |0.2504      |
+|high_school    |48631  |0.241       |
+|graduate_school|30130  |0.2117      |
+|unknown        |12438  |0.0963      |
+|others         |4801   |0.0752      |
++---------------+-------+------------+
+
+2026-06-10 08:46:59,369 | INFO    | etl.load | --- Q4 ---
+SELECT marriage_label,
+       COUNT(*)                                   AS clients,
+       ROUND(AVG(default_payment_next_month), 4)  AS default_rate
+FROM bigdata_etl.dim_client
+GROUP BY marriage_label
+ORDER BY default_rate DESC
++--------------+-------+------------+
+|marriage_label|clients|default_rate|
++--------------+-------+------------+
+|married       |52359  |0.2661      |
+|others        |9947   |0.2036      |
+|single        |81762  |0.1992      |
+|unknown       |5932   |0.1576      |
++--------------+-------+------------+
+
+2026-06-10 08:46:59,587 | INFO    | etl.load | --- Q5 ---
+SELECT age_band,
+       COUNT(*)                                   AS clients,
+       ROUND(AVG(default_payment_next_month), 4)  AS default_rate
+FROM bigdata_etl.dim_client
+GROUP BY age_band
+ORDER BY age_band
++--------+-------+------------+
+|age_band|clients|default_rate|
++--------+-------+------------+
+|30-39   |38558  |0.2106      |
+|40-49   |42456  |0.2451      |
+|50-59   |26958  |0.2222      |
+|60+     |2130   |0.1568      |
+|<30     |39898  |0.2089      |
++--------+-------+------------+
+
+2026-06-10 08:46:59,821 | INFO    | etl.load | --- Q6 ---
+SELECT d.date_key,
+       d.month_name,
+       ROUND(AVG(f.credit_utilization), 4) AS avg_credit_utilization,
+       ROUND(AVG(f.payment_ratio), 4)      AS avg_payment_ratio,
+       ROUND(AVG(f.bill_amt), 2)           AS avg_bill_amt
+FROM bigdata_etl.fact_credit_monthly f
+JOIN bigdata_etl.dim_date d ON f.date_key = d.date_key
+GROUP BY d.date_key, d.month_name
+ORDER BY d.date_key
++--------+----------+----------------------+-----------------+------------+
+|date_key|month_name|avg_credit_utilization|avg_payment_ratio|avg_bill_amt|
++--------+----------+----------------------+-----------------+------------+
+|200504  |Apr       |0.306                 |0.5957           |28479.32    |
+|200505  |May       |0.2489                |0.5194           |26070.35    |
+|200506  |Jun       |0.3334                |0.4624           |30414.06    |
+|200507  |Jul       |0.3767                |0.2676           |35472.08    |
+|200508  |Aug       |0.418                 |0.2691           |39450.97    |
+|200509  |Sep       |0.478                 |0.5776           |44255.79    |
++--------+----------+----------------------+-----------------+------------+
+
+2026-06-10 08:47:00,791 | INFO    | etl.load | --- Q7 ---
+SELECT d.date_key,
+       d.month_name,
+       ROUND(AVG(f.exchange_rate_twd_usd), 4) AS avg_fx_twd_usd,
+       ROUND(AVG(f.real_broad_eer), 4)        AS avg_real_broad_eer,
+       ROUND(AVG(f.total_reserves), 2)        AS avg_total_reserves,
+       ROUND(AVG(f.default_payment_next_month), 4) AS default_rate
+FROM bigdata_etl.fact_credit_monthly f
+JOIN bigdata_etl.dim_date d ON f.date_key = d.date_key
+GROUP BY d.date_key, d.month_name
+ORDER BY d.date_key
++--------+----------+--------------+------------------+------------------+------------+
+|date_key|month_name|avg_fx_twd_usd|avg_real_broad_eer|avg_total_reserves|default_rate|
++--------+----------+--------------+------------------+------------------+------------+
+|200504  |Apr       |31.48         |106.39            |166563.28         |0.2212      |
+|200505  |May       |31.2652       |107.87            |171646.98         |0.2212      |
+|200506  |Jun       |31.3473       |109.61            |174112.78         |0.2212      |
+|200507  |Jul       |31.8855       |109.75            |174646.91         |0.2212      |
+|200508  |Aug       |32.0757       |108.39            |174050.94         |0.2212      |
+|200509  |Sep       |32.9248       |105.43            |175061.9          |0.2212      |
++--------+----------+--------------+------------------+------------------+------------+
+
+2026-06-10 08:47:01,527 | INFO    | etl.load | --- Q8 ---
+SELECT ROUND(CORR(default_payment_next_month, exchange_rate_twd_usd), 4) AS corr_default_fx,
+       ROUND(CORR(default_payment_next_month, real_broad_eer), 4)        AS corr_default_reer,
+       ROUND(CORR(default_payment_next_month, total_reserves), 4)        AS corr_default_reserves
+FROM bigdata_etl.fact_credit_monthly
++---------------+-----------------+---------------------+
+|corr_default_fx|corr_default_reer|corr_default_reserves|
++---------------+-----------------+---------------------+
+|0.0            |0.0              |0.0                  |
++---------------+-----------------+---------------------+
+
+2026-06-10 08:47:02,051 | INFO    | etl.load | [ETL/load] status=OK rows=900000 duration=18.71s peak_rss=56.4MB
+2026-06-10 08:47:02,051 | INFO    | etl.load | === ETL Load finished (fact rows=900000) ===

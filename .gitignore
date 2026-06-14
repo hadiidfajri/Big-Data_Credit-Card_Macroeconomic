@@ -1,0 +1,45 @@
+# ---- secrets / env ----
+.env
+
+# ---- raw & lake data (keep the folders via .gitkeep, ignore contents) ----
+raw/*
+!raw/.gitkeep
+datalake/*
+!datalake/.gitkeep
+
+# ---- pipeline logs (keep the folders) ----
+**/logs/*
+!**/logs/.gitkeep
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ---- tests / coverage ----
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ---- generated warehouse / dashboard artifacts (regenerable) ----
+warehouse/staging/
+dashboard/exports/
+
+# ---- Spark / Hive local artifacts ----
+spark-warehouse/
+metastore_db/
+derby.log
+
+# ---- Tableau / Power BI temp ----
+*.twbr
+~$*.pbix
+*.tde
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,136 @@
+26/06/10 08:50:35 INFO SparkContext: Running Spark version 3.5.6
+26/06/10 08:50:35 INFO SparkContext: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 08:50:35 INFO SparkContext: Java version 17.0.15
+26/06/10 08:50:35 INFO ResourceUtils: ==============================================================
+26/06/10 08:50:35 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/06/10 08:50:35 INFO ResourceUtils: ==============================================================
+26/06/10 08:50:35 INFO SparkContext: Submitted application: elt-extract-load
+26/06/10 08:50:35 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/06/10 08:50:35 INFO ResourceProfile: Limiting resource is cpu
+26/06/10 08:50:35 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/06/10 08:50:35 INFO SecurityManager: Changing view acls to: root,spark
+26/06/10 08:50:35 INFO SecurityManager: Changing modify acls to: root,spark
+26/06/10 08:50:35 INFO SecurityManager: Changing view acls groups to: 
+26/06/10 08:50:35 INFO SecurityManager: Changing modify acls groups to: 
+26/06/10 08:50:35 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root, spark; groups with view permissions: EMPTY; users with modify permissions: root, spark; groups with modify permissions: EMPTY
+26/06/10 08:50:35 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/10 08:50:35 INFO Utils: Successfully started service 'sparkDriver' on port 39203.
+26/06/10 08:50:35 INFO SparkEnv: Registering MapOutputTracker
+26/06/10 08:50:35 INFO SparkEnv: Registering BlockManagerMaster
+26/06/10 08:50:35 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/10 08:50:35 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/10 08:50:35 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/06/10 08:50:35 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-f477ba1b-1632-461e-8c57-6070d4a98606
+26/06/10 08:50:35 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/06/10 08:50:35 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/10 08:50:35 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/06/10 08:50:35 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/10 08:50:35 INFO Executor: Starting executor ID driver on host 2ec9f575afb8
+26/06/10 08:50:35 INFO Executor: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 08:50:35 INFO Executor: Java version 17.0.15
+26/06/10 08:50:35 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/06/10 08:50:35 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@5b88b49e for default.
+26/06/10 08:50:35 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 35821.
+26/06/10 08:50:35 INFO NettyBlockTransferService: Server created on 2ec9f575afb8:35821
+26/06/10 08:50:35 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/10 08:50:35 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 2ec9f575afb8, 35821, None)
+26/06/10 08:50:35 INFO BlockManagerMasterEndpoint: Registering block manager 2ec9f575afb8:35821 with 434.4 MiB RAM, BlockManagerId(driver, 2ec9f575afb8, 35821, None)
+26/06/10 08:50:35 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 2ec9f575afb8, 35821, None)
+26/06/10 08:50:35 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 2ec9f575afb8, 35821, None)
+2026-06-10 08:50:36,144 | INFO    | elt.extract_load | === ELT Extract+Load started (db=bigdata_elt) ===
+26/06/10 08:50:44 WARN SessionState: METASTORE_FILTER_HOOK will be ignored, since hive.security.authorization.manager is set to instance of HiveAuthorizerFactory.
+2026-06-10 08:50:45,100 | INFO    | elt.extract_load | raw_credit <- synthetic_credit_clients.csv rows=150000 cols=25
+26/06/10 08:50:47 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 08:50:47 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:50:47 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:50:47 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 08:50:47 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 08:50:47 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 08:50:47 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+2026-06-10 08:50:47,618 | INFO    | elt.extract_load | raw_macro rows=48 (series=4)
+2026-06-10 08:50:47,957 | INFO    | elt.extract_load | [ELT/extract_load] status=OK rows=150048 duration=11.80s peak_rss=80.1MB
+2026-06-10 08:50:47,958 | INFO    | elt.extract_load | === ELT Extract+Load finished (rows=150048) ===
+26/06/10 08:50:51 INFO SparkContext: Running Spark version 3.5.6
+26/06/10 08:50:51 INFO SparkContext: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 08:50:51 INFO SparkContext: Java version 17.0.15
+26/06/10 08:50:51 INFO ResourceUtils: ==============================================================
+26/06/10 08:50:51 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/06/10 08:50:51 INFO ResourceUtils: ==============================================================
+26/06/10 08:50:51 INFO SparkContext: Submitted application: elt-transform
+26/06/10 08:50:51 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/06/10 08:50:51 INFO ResourceProfile: Limiting resource is cpu
+26/06/10 08:50:51 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/06/10 08:50:51 INFO SecurityManager: Changing view acls to: root,spark
+26/06/10 08:50:51 INFO SecurityManager: Changing modify acls to: root,spark
+26/06/10 08:50:52 INFO SecurityManager: Changing view acls groups to: 
+26/06/10 08:50:52 INFO SecurityManager: Changing modify acls groups to: 
+26/06/10 08:50:52 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root, spark; groups with view permissions: EMPTY; users with modify permissions: root, spark; groups with modify permissions: EMPTY
+26/06/10 08:50:52 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/10 08:50:52 INFO Utils: Successfully started service 'sparkDriver' on port 33899.
+26/06/10 08:50:52 INFO SparkEnv: Registering MapOutputTracker
+26/06/10 08:50:52 INFO SparkEnv: Registering BlockManagerMaster
+26/06/10 08:50:52 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/10 08:50:52 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/10 08:50:52 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/06/10 08:50:52 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-5ace73d1-51f1-4841-85b4-b760940b4822
+26/06/10 08:50:52 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/06/10 08:50:52 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/10 08:50:52 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/06/10 08:50:52 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/10 08:50:52 INFO Executor: Starting executor ID driver on host 2ec9f575afb8
+26/06/10 08:50:52 INFO Executor: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 08:50:52 INFO Executor: Java version 17.0.15
+26/06/10 08:50:52 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/06/10 08:50:52 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@481835c for default.
+26/06/10 08:50:52 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44633.
+26/06/10 08:50:52 INFO NettyBlockTransferService: Server created on 2ec9f575afb8:44633
+26/06/10 08:50:52 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/10 08:50:52 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 2ec9f575afb8, 44633, None)
+26/06/10 08:50:52 INFO BlockManagerMasterEndpoint: Registering block manager 2ec9f575afb8:44633 with 434.4 MiB RAM, BlockManagerId(driver, 2ec9f575afb8, 44633, None)
+26/06/10 08:50:52 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 2ec9f575afb8, 44633, None)
+26/06/10 08:50:52 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 2ec9f575afb8, 44633, None)
+2026-06-10 08:50:53,033 | INFO    | elt.transform | === ELT Transform started (db=bigdata_elt) ===
+2026-06-10 08:50:55,379 | INFO    | elt.transform | Executing 5 ELT statements
+2026-06-10 08:50:55,380 | INFO    | elt.transform | --- statement 1 ---
+26/06/10 08:50:58 WARN SessionState: METASTORE_FILTER_HOOK will be ignored, since hive.security.authorization.manager is set to instance of HiveAuthorizerFactory.
+2026-06-10 08:50:59,080 | INFO    | elt.transform | --- statement 2 ---
+2026-06-10 08:51:00,975 | INFO    | elt.transform | --- statement 3 ---
+2026-06-10 08:51:04,214 | INFO    | elt.transform | --- statement 4 ---
+2026-06-10 08:51:05,003 | INFO    | elt.transform | --- statement 5 ---
+2026-06-10 08:51:06,112 | INFO    | elt.transform | materialised bigdata_elt.elt_macro_monthly rows=12
+2026-06-10 08:51:06,261 | INFO    | elt.transform | materialised bigdata_elt.elt_fact_monthly rows=900000
+2026-06-10 08:51:06,377 | INFO    | elt.transform | materialised bigdata_elt.elt_client_trends rows=900000
+2026-06-10 08:51:06,487 | INFO    | elt.transform | materialised bigdata_elt.elt_default_by_demographic rows=17
+2026-06-10 08:51:06,609 | INFO    | elt.transform | materialised bigdata_elt.elt_default_vs_macro rows=6
+2026-06-10 08:51:06,610 | INFO    | elt.transform | Sample — default rate by demographic:
++---------+---------------+--------------+--------+-------+------------+
+|sex_label|education_label|marriage_label|age_band|clients|default_rate|
++---------+---------------+--------------+--------+-------+------------+
+|NULL     |NULL           |NULL          |NULL    |150000 |0.2212      |
+|NULL     |NULL           |single        |NULL    |81762  |0.1992      |
+|male     |NULL           |NULL          |NULL    |76059  |0.1991      |
+|female   |NULL           |NULL          |NULL    |73941  |0.2439      |
+|NULL     |university     |NULL          |NULL    |54000  |0.2504      |
+|NULL     |NULL           |married       |NULL    |52359  |0.2661      |
+|NULL     |high_school    |NULL          |NULL    |48631  |0.241       |
+|NULL     |NULL           |NULL          |40-49   |42456  |0.2451      |
+|NULL     |NULL           |NULL          |<30     |39898  |0.2089      |
+|NULL     |NULL           |NULL          |30-39   |38558  |0.2106      |
+|NULL     |graduate_school|NULL          |NULL    |30130  |0.2117      |
+|NULL     |NULL           |NULL          |50-59   |26958  |0.2222      |
+|NULL     |unknown        |NULL          |NULL    |12438  |0.0963      |
+|NULL     |NULL           |others        |NULL    |9947   |0.2036      |
+|NULL     |NULL           |unknown       |NULL    |5932   |0.1576      |
+|NULL     |others         |NULL          |NULL    |4801   |0.0752      |
+|NULL     |NULL           |NULL          |60+     |2130   |0.1568      |
++---------+---------------+--------------+--------+-------+------------+
+
+2026-06-10 08:51:07,723 | INFO    | elt.transform | [ELT/transform] status=OK rows=1800035 duration=14.68s peak_rss=56.5MB
+2026-06-10 08:51:07,724 | INFO    | elt.transform | === ELT Transform finished ===

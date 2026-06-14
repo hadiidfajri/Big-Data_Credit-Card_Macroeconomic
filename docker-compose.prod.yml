@@ -1,0 +1,42 @@
+# ============================================================================
+# ⚠️  INSECURE / OPT-IN override — exposes services DIRECTLY to the public
+#     internet (0.0.0.0) with NO authentication. Only use this for a short,
+#     throwaway demo where you accept the risk. The SECURE default is the base
+#     file alone (ports bound to 127.0.0.1) + an SSH tunnel — see
+#     docs/HOSTING_ORACLE.md §Secure.
+#
+# Apply ON TOP of the base file:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# Requires Docker Compose v2.24+ for the `!override` tag (Oracle's
+# docker-compose-plugin is recent enough).
+#
+# Set PUBLIC_IP in .env on the VM (e.g. PUBLIC_IP=203.0.113.10).
+# ============================================================================
+services:
+  kafka:
+    # !override REPLACES the base 127.0.0.1 binding (otherwise compose would keep
+    # BOTH and the safe binding would be defeated).
+    ports: !override
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:19092,EXTERNAL://${PUBLIC_IP:?set PUBLIC_IP in .env}:9092"
+
+  kafka-ui:
+    ports: !override
+      - "8085:8080"
+
+  spark-master:
+    ports: !override
+      - "7077:7077"
+      - "8080:8080"
+
+  hiveserver2:
+    ports: !override
+      - "10000:10000"
+      - "10002:10002"
+
+  spark-worker:
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker",
+              "spark://spark-master:7077", "--cores", "3", "--memory", "6G",
+              "--webui-port", "8081"]

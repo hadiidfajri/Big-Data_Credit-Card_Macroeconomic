@@ -1,0 +1,170 @@
+# ============================================================================
+# Tugas Besar Big Data — local infrastructure
+# Kafka (KRaft)  +  Spark cluster (master + worker)  +  Hive warehouse
+# (Postgres-backed metastore + HiveServer2).  Infra only — no pipeline code.
+#
+#   Build:  docker compose build
+#   Up:     docker compose up -d
+#   Down:   docker compose down        (add -v to wipe volumes)
+#
+# Variable substitution is read from .env (copy .env.example -> .env first).
+# In-container clients reach Kafka at kafka:19092 and the warehouse via the
+# shared 'warehouse' volume mounted at the SAME path everywhere so the absolute
+# table paths stored in the Hive metastore resolve in the Spark containers too.
+# ============================================================================
+name: bigdata-tubes
+
+services:
+  # ---------------------------------------------------------------- Kafka (KRaft)
+  kafka:
+    image: apache/kafka:3.9.0
+    container_name: kafka
+    ports:
+      # Bound to 127.0.0.1 only — NOT the public interface. Reach it from another
+      # machine via an SSH tunnel (see docs/HOSTING_ORACLE.md §Secure). To expose
+      # publicly anyway (insecure), apply docker-compose.prod.yml.
+      - "127.0.0.1:9092:9092"  # host clients -> localhost:9092 (EXTERNAL listener)
+    environment:
+      CLUSTER_ID: "5L6g3nShT-eMCtK--X86sw"
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      # Three listeners: CONTROLLER (quorum), INTERNAL (docker net), EXTERNAL (host)
+      KAFKA_LISTENERS: "CONTROLLER://:9093,INTERNAL://:19092,EXTERNAL://:9092"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:19092,EXTERNAL://localhost:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_NUM_PARTITIONS: 1
+      KAFKA_LOG_DIRS: "/var/lib/kafka/data"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+
+  # ---------------------------------------------------------------- Kafka UI (optional helper)
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8085:8080"  # http://localhost:8085 (tunnel for remote access)
+    environment:
+      KAFKA_CLUSTERS_0_NAME: "local"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:19092"
+      DYNAMIC_CONFIG_ENABLED: "true"
+
+  # ---------------------------------------------------------------- Spark master
+  spark-master:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.spark
+    image: bigdata-spark:3.5
+    container_name: spark-master
+    # The official apache/spark base has NO bitnami SPARK_MODE entrypoint, so the
+    # standalone Master is launched explicitly (foreground, via spark-class).
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master",
+              "--host", "spark-master", "--port", "7077", "--webui-port", "8080"]
+    environment:
+      # --- app connection config (service names). Scripts load .env with
+      #     override=False, so these in-container values win over .env's localhost. ---
+      APP_SPARK_MASTER: "local[*]"          # set to spark://spark-master:7077 to use the cluster
+      HIVE_METASTORE_URI: "thrift://hive-metastore:9083"
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:19092"
+      FRED_API_KEY: "${FRED_API_KEY:-}"
+      # Valid $USER + writable $HOME so torch/getpass (CTGAN) and the JVM's
+      # user.home (Spark ivy needs an absolute basedir) both resolve.
+      USER: "spark"
+      HOME: "/tmp"
+    ports:
+      - "127.0.0.1:7077:7077"  # cluster master (spark://localhost:7077)
+      - "127.0.0.1:8080:8080"  # master web UI -> http://localhost:8080 (tunnel for remote)
+    volumes:
+      - ./:/app                                      # project root (scripts run from here later)
+      - warehouse:/opt/hive/data/warehouse           # shared with Hive (same path everywhere)
+
+  # ---------------------------------------------------------------- Spark worker
+  spark-worker:
+    image: bigdata-spark:3.5
+    container_name: spark-worker
+    depends_on:
+      - spark-master
+    # Standalone Worker, launched explicitly (apache base has no SPARK_MODE).
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker",
+              "spark://spark-master:7077", "--cores", "2", "--memory", "2G",
+              "--webui-port", "8081"]
+    environment:
+      USER: "spark"
+      HOME: "/tmp"
+    volumes:
+      - ./:/app
+      - warehouse:/opt/hive/data/warehouse
+
+  # ---------------------------------------------------------------- Postgres (metastore backing DB)
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-hive}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-hive}"
+      POSTGRES_DB: "${POSTGRES_DB:-metastore}"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-hive} -d ${POSTGRES_DB:-metastore}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ---------------------------------------------------------------- Hive metastore (Thrift :9083)
+  hive-metastore:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.hive
+    image: bigdata-hive:4.0.0
+    container_name: hive-metastore
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:9083:9083"  # metastore Thrift — localhost only
+    environment:
+      SERVICE_NAME: metastore
+      DB_DRIVER: postgres
+      SERVICE_OPTS: >-
+        -Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver
+        -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-metastore}
+        -Djavax.jdo.option.ConnectionUserName=${POSTGRES_USER:-hive}
+        -Djavax.jdo.option.ConnectionPassword=${POSTGRES_PASSWORD:-hive}
+    volumes:
+      - warehouse:/opt/hive/data/warehouse
+
+  # ---------------------------------------------------------------- HiveServer2 (JDBC/ODBC :10000)
+  hiveserver2:
+    image: bigdata-hive:4.0.0
+    container_name: hiveserver2
+    depends_on:
+      - hive-metastore
+    ports:
+      - "127.0.0.1:10000:10000"  # JDBC/ODBC endpoint — localhost only (tunnel for BI tools)
+      - "127.0.0.1:10002:10002"  # HiveServer2 web UI -> http://localhost:10002
+    environment:
+      SERVICE_NAME: hiveserver2
+      IS_RESUME: "true"        # metastore already initialised the schema
+      SERVICE_OPTS: "-Dhive.metastore.uris=thrift://hive-metastore:9083"
+    volumes:
+      - warehouse:/opt/hive/data/warehouse
+
+volumes:
+  kafka-data:
+  postgres-data:
+  warehouse:

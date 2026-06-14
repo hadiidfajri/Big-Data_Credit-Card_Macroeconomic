@@ -1,0 +1,44 @@
+2026-06-10 02:56:47,704 | INFO    | synthetic.ctgan | === CTGAN synthesis (n=150000, epochs=10, seed=42, balance=False) ===
+2026-06-10 02:56:51,494 | INFO    | synthetic.ctgan | Seed rows=30000, target column='default payment next month'
+/opt/bitnami/python/lib/python3.12/site-packages/sdv/single_table/base.py:120: FutureWarning: The 'SingleTableMetadata' is deprecated. Please use the new 'Metadata' class for synthesizers.
+  warnings.warn(DEPRECATION_MSG, FutureWarning)
+/opt/bitnami/python/lib/python3.12/site-packages/sdv/single_table/base.py:105: UserWarning: We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions.
+  warnings.warn(
+/opt/bitnami/python/lib/python3.12/site-packages/ctgan/synthesizers/_utils.py:16: FutureWarning: `cuda` parameter is deprecated and will be removed in a future release. Please use `enable_gpu` instead.
+  warnings.warn(
+
+  0%|          | 0/10 [00:00<?, ?it/s]
+Gen. (+00.00) | Discrim. (+00.00):   0%|          | 0/10 [00:00<?, ?it/s]
+Gen. (+00.25) | Discrim. (-00.21):   0%|          | 0/10 [00:03<?, ?it/s]
+Gen. (+00.25) | Discrim. (-00.21):  10%|█         | 1/10 [00:03<00:28,  3.15s/it]
+Gen. (-00.65) | Discrim. (-00.05):  10%|█         | 1/10 [00:06<00:28,  3.15s/it]
+Gen. (-00.65) | Discrim. (-00.05):  20%|██        | 2/10 [00:06<00:24,  3.10s/it]
+Gen. (-00.93) | Discrim. (-00.39):  20%|██        | 2/10 [00:09<00:24,  3.10s/it]
+Gen. (-00.93) | Discrim. (-00.39):  30%|███       | 3/10 [00:09<00:21,  3.02s/it]
+Gen. (-01.59) | Discrim. (-00.19):  30%|███       | 3/10 [00:12<00:21,  3.02s/it]
+Gen. (-01.59) | Discrim. (-00.19):  40%|████      | 4/10 [00:12<00:17,  2.96s/it]
+Gen. (-02.04) | Discrim. (+00.05):  40%|████      | 4/10 [00:14<00:17,  2.96s/it]
+Gen. (-02.04) | Discrim. (+00.05):  50%|█████     | 5/10 [00:14<00:14,  2.94s/it]
+Gen. (-02.48) | Discrim. (+00.14):  50%|█████     | 5/10 [00:17<00:14,  2.94s/it]
+Gen. (-02.48) | Discrim. (+00.14):  60%|██████    | 6/10 [00:17<00:11,  2.93s/it]
+Gen. (-02.31) | Discrim. (+00.13):  60%|██████    | 6/10 [00:20<00:11,  2.93s/it]
+Gen. (-02.31) | Discrim. (+00.13):  70%|███████   | 7/10 [00:20<00:08,  2.95s/it]
+Gen. (-02.62) | Discrim. (-00.05):  70%|███████   | 7/10 [00:23<00:08,  2.95s/it]
+Gen. (-02.62) | Discrim. (-00.05):  80%|████████  | 8/10 [00:23<00:05,  3.00s/it]
+Gen. (-01.90) | Discrim. (-00.48):  80%|████████  | 8/10 [00:26<00:05,  3.00s/it]
+Gen. (-01.90) | Discrim. (-00.48):  90%|█████████ | 9/10 [00:26<00:02,  3.00s/it]
+Gen. (-01.13) | Discrim. (-00.61):  90%|█████████ | 9/10 [00:29<00:02,  3.00s/it]
+Gen. (-01.13) | Discrim. (-00.61): 100%|██████████| 10/10 [00:29<00:00,  3.00s/it]
+Gen. (-01.13) | Discrim. (-00.61): 100%|██████████| 10/10 [00:29<00:00,  2.99s/it]
+2026-06-10 02:59:30,920 | INFO    | synthetic.ctgan | Target class plan: {0: 116820, 1: 33180}
+
+  0%|          | 0/150000 [00:00<?, ?it/s]
+Sampling conditions:   0%|          | 0/150000 [00:00<?, ?it/s]
+Sampling conditions:  55%|█████▌    | 82675/150000 [00:04<00:04, 16563.30it/s]
+Sampling conditions:  78%|███████▊  | 116744/150000 [00:06<00:01, 19031.97it/s]
+Sampling conditions:  84%|████████▍ | 126383/150000 [00:07<00:01, 15015.57it/s]
+Sampling conditions: 100%|██████████| 150000/150000 [00:10<00:00, 12925.98it/s]
+Sampling conditions: 100%|██████████| 150000/150000 [00:10<00:00, 14501.76it/s]
+2026-06-10 02:59:43,102 | INFO    | synthetic.ctgan | Wrote 150000 rows -> /app/synthetic/synthetic_credit_clients.csv | class balance={0: 0.7788, 1: 0.2212}
+2026-06-10 02:59:43,123 | INFO    | synthetic.ctgan | [SYNTHETIC/ctgan] status=OK rows=150000 duration=175.42s peak_rss=523.3MB
+2026-06-10 02:59:43,123 | INFO    | synthetic.ctgan | === CTGAN done ===

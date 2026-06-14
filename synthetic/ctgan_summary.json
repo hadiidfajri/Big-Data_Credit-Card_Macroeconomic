@@ -1,0 +1,13 @@
+{
+  "rows_generated": 150000,
+  "epochs": 300,
+  "seed": 42,
+  "balance_mode": "preserve_original",
+  "target_column": "default payment next month",
+  "synthetic_class_balance": {
+    "0": 0.7788,
+    "1": 0.2212
+  },
+  "real_rows": 30000,
+  "output_csv": "synthetic/synthetic_credit_clients.csv"
+}

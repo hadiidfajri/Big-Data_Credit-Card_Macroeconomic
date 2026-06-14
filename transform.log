@@ -1,0 +1,164 @@
+26/06/10 03:06:49 INFO SparkContext: Running Spark version 3.5.6
+26/06/10 03:06:49 INFO SparkContext: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 03:06:49 INFO SparkContext: Java version 17.0.15
+26/06/10 03:06:49 INFO ResourceUtils: ==============================================================
+26/06/10 03:06:49 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/06/10 03:06:49 INFO ResourceUtils: ==============================================================
+26/06/10 03:06:49 INFO SparkContext: Submitted application: etl-transform
+26/06/10 03:06:49 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/06/10 03:06:49 INFO ResourceProfile: Limiting resource is cpu
+26/06/10 03:06:49 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/06/10 03:06:49 INFO SecurityManager: Changing view acls to: sparkuser,spark
+26/06/10 03:06:49 INFO SecurityManager: Changing modify acls to: sparkuser,spark
+26/06/10 03:06:49 INFO SecurityManager: Changing view acls groups to: 
+26/06/10 03:06:49 INFO SecurityManager: Changing modify acls groups to: 
+26/06/10 03:06:49 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: sparkuser, spark; groups with view permissions: EMPTY; users with modify permissions: sparkuser, spark; groups with modify permissions: EMPTY
+26/06/10 03:06:49 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/10 03:06:50 INFO Utils: Successfully started service 'sparkDriver' on port 43571.
+26/06/10 03:06:50 INFO SparkEnv: Registering MapOutputTracker
+26/06/10 03:06:50 INFO SparkEnv: Registering BlockManagerMaster
+26/06/10 03:06:50 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/10 03:06:50 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/10 03:06:50 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/06/10 03:06:50 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-7128cd90-a19d-4781-8810-5a4ec0a82633
+26/06/10 03:06:50 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/06/10 03:06:50 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/10 03:06:50 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/06/10 03:06:50 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/10 03:06:50 INFO Executor: Starting executor ID driver on host 8ef5a0b9303c
+26/06/10 03:06:50 INFO Executor: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/10 03:06:50 INFO Executor: Java version 17.0.15
+26/06/10 03:06:50 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/06/10 03:06:50 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@4ee17676 for default.
+26/06/10 03:06:50 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 41043.
+26/06/10 03:06:50 INFO NettyBlockTransferService: Server created on 8ef5a0b9303c:41043
+26/06/10 03:06:50 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/10 03:06:50 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 8ef5a0b9303c, 41043, None)
+26/06/10 03:06:50 INFO BlockManagerMasterEndpoint: Registering block manager 8ef5a0b9303c:41043 with 434.4 MiB RAM, BlockManagerId(driver, 8ef5a0b9303c, 41043, None)
+26/06/10 03:06:50 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 8ef5a0b9303c, 41043, None)
+26/06/10 03:06:50 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 8ef5a0b9303c, 41043, None)
+2026-06-10 03:06:51,067 | INFO    | etl.transform | === ETL Transform started ===
+2026-06-10 03:06:51,072 | INFO    | etl.transform | Credit source: synthetic synthetic_credit_clients.csv
+2026-06-10 03:06:58,816 | INFO    | etl.transform | Credit dedup: 150000 -> 150000 rows
+2026-06-10 03:07:07,033 | INFO    | etl.transform | Macro exchange_rate_twd_usd: z-score |>3| outliers = 0
+2026-06-10 03:07:07,596 | INFO    | etl.transform | Macro real_broad_eer: z-score |>3| outliers = 0
+2026-06-10 03:07:08,152 | INFO    | etl.transform | Macro nominal_broad_eer: z-score |>3| outliers = 0
+2026-06-10 03:07:08,822 | INFO    | etl.transform | Macro total_reserves: z-score |>3| outliers = 0
+2026-06-10 03:07:21,472 | INFO    | etl.transform | VALIDATION uniqueness_id_date         -> {'violations': 0, 'pass': True}
+2026-06-10 03:07:21,472 | INFO    | etl.transform | VALIDATION not_null_keys              -> {'violations': 0, 'pass': True}
+2026-06-10 03:07:21,473 | INFO    | etl.transform | VALIDATION range_checks               -> {'violations': 139169, 'pass': False}
+2026-06-10 03:07:21,474 | INFO    | etl.transform | VALIDATION dtype_consistency          -> {'types': ['double'], 'pass': True}
+2026-06-10 03:07:21,474 | INFO    | etl.transform | VALIDATION referential_integrity      -> {'orphan_dates': 0, 'orphan_clients': 0, 'pass': True}
+2026-06-10 03:07:21,475 | INFO    | etl.transform | VALIDATION distribution_default_rate  -> {'default_rate': 0.2212, 'pass': True}
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 47.50% for 16 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 44.71% for 17 writers
+26/06/10 03:07:23 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 42.22% for 18 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 44.71% for 17 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 47.50% for 16 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 03:07:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:34 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 03:07:35 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 47.50% for 16 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 50.67% for 15 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 54.29% for 14 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 03:07:36 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 58.46% for 13 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 63.33% for 12 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 69.09% for 11 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 76.00% for 10 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 03:07:42 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 84.44% for 9 writers
+26/06/10 03:07:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+26/06/10 03:07:48 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+Scaling row group sizes to 95.00% for 8 writers
+2026-06-10 03:07:54,795 | INFO    | etl.transform | Staging written: fact rows=900000, clients=150000
+2026-06-10 03:07:54,806 | INFO    | etl.transform | [ETL/transform] status=OK rows=900000 duration=63.73s peak_rss=95.7MB
+2026-06-10 03:07:54,806 | INFO    | etl.transform | === ETL Transform finished ===

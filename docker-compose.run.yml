@@ -1,0 +1,10 @@
+# Local re-run override: keep the EXISTING (already-built) Spark image alive so we
+# can `exec spark-submit ... --master local[*]` into it, without rebuilding to the
+# apache base. Pipeline jobs run in-process (local[*]); the standalone master/worker
+# daemons are not needed for that. Apply:
+#   docker compose -f docker-compose.yml -f docker-compose.run.yml up -d spark-master
+services:
+  spark-master:
+    command: ["sleep", "infinity"]
+  spark-worker:
+    command: ["sleep", "infinity"]

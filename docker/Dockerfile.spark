@@ -1,0 +1,40 @@
+# ============================================================================
+# Custom Spark image for the Big Data project.
+#
+# ARM/cloud build: rebased on the OFFICIAL apache/spark image (multi-arch,
+# has linux/arm64) because Bitnami never shipped an arm64 Spark and retired its
+# free catalog in 2025. The official image runs fine on Oracle Cloud's Ampere
+# (aarch64) "Always Free" VM. (On a local amd64 machine this same tag also works.)
+#
+# We layer in the project Python deps (sdv/CTGAN, fredapi, kafka-python, ...).
+# Used by both spark-master and spark-worker.
+# Infra only — contains no pipeline code.
+#
+# NB: the base apache image has NO bitnami-style SPARK_MODE entrypoint, so the
+#     master/worker start commands are set explicitly in docker-compose.yml.
+# ============================================================================
+FROM apache/spark:3.5.3-python3
+
+# The official image runs as the non-root 'spark' user (uid 185); switch to root
+# to install OS + Python packages.
+USER root
+
+# pip is not guaranteed in the slim python3 variant — install it from apt.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /tmp/requirements.txt
+
+# Install the project Python deps. Skip pyspark — the base image already ships
+# Spark + PySpark, so re-installing the 317 MB sdist wastes disk and build time.
+RUN grep -ivE '^pyspark([=<>!~ ]|$)' /tmp/requirements.txt > /tmp/req.spark.txt \
+    && python3 -m pip install --no-cache-dir --break-system-packages -r /tmp/req.spark.txt
+
+# Make HOME writable for the runtime user so the JVM's user.home is valid (Spark
+# ivy needs an absolute basedir) and torch's getpass.getuser() resolves. The
+# official image already gives uid 185 a passwd entry, so this is belt-and-braces.
+ENV HOME=/tmp
+
+# Drop back to the default non-root spark user (uid 185).
+USER spark
