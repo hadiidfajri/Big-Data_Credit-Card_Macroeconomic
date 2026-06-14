@@ -1,7 +1,7 @@
 # Tugas Besar Big Data — ETL & ELT Pipeline + Analytics Dashboard
 
 Credit-card **default-risk analytics for Taiwan (2005)**, relating borrower behaviour to the
-macroeconomic environment (FRED Taiwan series). Full design lives in [.claude/CLAUDE.md](.claude/CLAUDE.md).
+macroeconomic environment (FRED Taiwan series). 
 
 Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive warehouse → Dashboard
 (Tableau/Power BI)**, di atas **Docker Compose**. Hasil run nyata: **150.000 nasabah sintetis (CTGAN)
@@ -51,7 +51,7 @@ Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive 
 ├── report/              # report.md skeleton (-> report.pdf)
 ├── logs/                # pipeline_metrics.jsonl (cross-cutting, for the ETL-vs-ELT comparison)
 ├── docker/              # Dockerfile.spark, Dockerfile.hive (infra build files)
-├── architecture_diagram.py / .pdf / .png   # data-flow diagram (CLAUDE.md §5)
+├── architecture_diagram.py / .pdf / .png   # data-flow diagram 
 ├── docker-compose.yml   # Kafka (KRaft) + Spark cluster + Hive warehouse
 ├── requirements.txt     # pinned Python deps (baked into the Spark image)
 └── .env.example         # environment template (FRED_API_KEY + infra config)
@@ -63,7 +63,7 @@ Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive 
 
 - **Docker Desktop** (with the WSL2 backend on Windows 11) — provides `docker compose`.
 - A free **FRED API key** — https://fred.stlouisfed.org/docs/api/api_key.html
-- **Tableau Desktop** + **Power BI Desktop** (dashboard phase) with a **Hive ODBC** driver.
+-  **Power BI Desktop** (dashboard phase) with a **Hive ODBC** driver.
 - *(Optional)* local **Python 3.11** if you want to run scripts outside the containers.
 
 ---
@@ -119,7 +119,7 @@ docker compose exec kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server loca
 
 ```
                  EXTRACT                    TRANSFORM                         LOAD
-ETL  (Part I) :  extract.py  ──►  CTGAN (synthetic/) ──► transform.py ──► load.py ──► 8 analytical queries
+ETL  (Part I) :  extract.py  ──►  transform.py ──► load.py ──► 8 analytical queries
                  (UCI + FRED -> raw/)   (≥150k clients, before FRED merge)   (Hive star schema)
 ELT  (Part II):  extract_load.py ──────────────────────►  transform.sql (in-warehouse, window/OLAP)
                  (same sources -> datalake/ -> Hive raw tables)
@@ -159,7 +159,7 @@ docker compose exec spark-master python /app/analysis/compare_pipelines.py
 python architecture_diagram.py    # diagram renders fine on the host (matplotlib)
 ```
 
-> Jobs default to `--master local[*]` (CLAUDE.md §2). To use the cluster instead, set
+> Jobs default to `--master local[*]` . To use the cluster instead, set
 > `APP_SPARK_MASTER=spark://spark-master:7077` in the `spark-master` service env.
 > Local (non-Docker) runs also work if you `pip install -r requirements.txt` first; `.env`'s
 > `localhost` addresses are then used automatically.
