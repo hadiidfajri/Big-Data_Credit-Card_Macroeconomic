@@ -1,37 +1,32 @@
-# ============================================================================
-# Tugas Besar Big Data — Python dependencies (pinned for reproducibility, §11)
-# Installed into the Spark cluster image via docker/Dockerfile.spark.
-# NOTE: sdv pulls heavy transitive deps (torch). If pip's resolver complains on
-#       the first `docker compose build`, bump the affected pin minorly.
-# ============================================================================
 
-# --- Spark (match the cluster image: bitnami/spark 3.5) ---
+
+# Spark ((bitnami/spark 3.5) 
 pyspark==3.5.3
 
-# --- Data handling ---
+# Data handling 
 pandas==2.2.2
 numpy==1.26.4
-openpyxl==3.1.5            # read .xlsx
-xlrd==2.0.1               # read the legacy UCI .xls source (row/col counts in Extract)
+openpyxl==3.1.5         
+xlrd==2.0.1              
 
-# --- Source extraction ---
-ucimlrepo==0.0.7          # fetch UCI dataset id 350 (credit card default)
-fredapi==0.5.2            # FRED Taiwan macro series
+# Source extraction 
+ucimlrepo==0.0.7          
+fredapi==0.5.2           
 requests==2.32.3
 
-# --- Synthetic augmentation (CTGAN) ---
-sdv==1.17.1               # provides CTGANSynthesizer
+#  Synthetic augmentation (CTGAN) 
+sdv==1.17.1               
 
-# --- Kafka producers / consumers ---
+# Kafka producers / consumers 
 kafka-python==2.0.2
 
-# --- Hive client (query HiveServer2 from Python; optional) ---
+# Hive client (query HiveServer2 from Python; optional)
 pyhive==0.7.0
 thrift==0.20.0
 thrift-sasl==0.4.3
 
-# --- Utilities ---
-python-dotenv==1.0.1      # load .env (FRED_API_KEY, infra config)
-scikit-learn==1.5.2       # normalization / encoding helpers
-psutil==5.9.8             # per-stage resource instrumentation (ETL vs ELT analysis)
-tabulate==0.9.0           # markdown tables in the ETL-vs-ELT comparison output
+# Utilities 
+python-dotenv==1.0.1      
+scikit-learn==1.5.2      
+psutil==5.9.8           
+tabulate==0.9.0           
