@@ -1,4 +1,0 @@
-2026-06-10 08:48:50,553 | WARNING | analysis.compare | No metrics file at B:\Download\Big Data_Tubes\logs\pipeline_metrics.jsonl — run the pipelines first.
-2026-06-10 08:48:50,584 | INFO    | analysis.compare | Wrote etl_vs_elt_metrics.{csv,md} to B:\Download\Big Data_Tubes\analysis
-2026-06-10 10:23:56,824 | INFO    | analysis.compare | Wrote etl_vs_elt_metrics.{csv,md} to B:\Download\Big Data_Tubes\analysis
-2026-06-10 05:56:26,427 | INFO    | analysis.compare | Wrote etl_vs_elt_metrics.{csv,md} to /app/analysis

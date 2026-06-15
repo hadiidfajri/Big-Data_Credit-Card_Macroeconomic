@@ -1,6 +1,0 @@
-pipeline,stage,status,rows,duration_s,peak_rss_mb
-ELT,extract_load,FAILED,,14.71,56.9
-ELT,transform,FAILED,,9.876,56.7
-ETL,load,FAILED,,14.89,56.4
-ETL,transform,OK,900000.0,109.051,95.5
-SYNTHETIC,ctgan,OK,150000.0,1793.08,522.8
