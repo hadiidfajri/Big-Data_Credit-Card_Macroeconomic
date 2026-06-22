@@ -1,4 +1,94 @@
-<!DOCTYPE html>
+"""Build a self-contained KPI website (ETL + ELT) from the exported CSVs.
+
+Reads the eight ``dashboard/exports/bigdata_{etl,elt}__kpi_*.csv`` files (produced
+by ``export_kpis_csv.py``) and renders a single **offline** HTML page
+(``dashboard/web/index.html``) styled after the "Incident Report" dashboard card
+(dark rounded card + layered shadow, animated CountUp numbers, stacked normalized
+area chart, trend badges, metric rows) — all with inline SVG/CSS/JS, no external
+libraries, no web server, no CORS. It opens by double-clicking the file.
+
+An ETL / ELT toggle switches between the ``bigdata_etl`` (ETL) and ``bigdata_elt``
+(ELT) warehouse outputs (the KPIs are identical, which is itself evidence that both
+pipelines agree). Visualisation is web-only — no Power BI, no Tableau.
+
+Run::
+
+    python dashboard/build_web_dashboard.py
+"""
+from __future__ import annotations
+
+import csv
+import datetime as dt
+import json
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent
+EXPORTS = BASE / "exports"
+OUT = BASE / "web" / "index.html"
+
+AGE_ORDER = {"<30": 0, "30-39": 1, "40-49": 2, "50-59": 3, "60+": 4}
+
+
+def read_csv(name: str) -> list[dict]:
+    path = EXPORTS / name
+    if not path.exists():
+        return []
+    with path.open(encoding="utf-8") as fh:
+        return list(csv.DictReader(fh))
+
+
+def num(x):
+    try:
+        f = float(x)
+        return int(f) if f.is_integer() else f
+    except (TypeError, ValueError):
+        return x
+
+
+def build_side(db: str) -> dict:
+    overall_rows = read_csv(f"{db}__kpi_overall.csv")
+    corr_rows = read_csv(f"{db}__kpi_corr_default_macro.csv")
+    demo_rows = read_csv(f"{db}__kpi_default_by_demographic.csv")
+    monthly_rows = read_csv(f"{db}__kpi_monthly_default_vs_macro.csv")
+
+    overall = {k: num(v) for k, v in (overall_rows[0] if overall_rows else {}).items()}
+    corr = {k: num(v) for k, v in (corr_rows[0] if corr_rows else {}).items()}
+
+    demo: dict[str, list] = {}
+    for r in demo_rows:
+        demo.setdefault(r["dimension"], []).append(
+            {"category": r["category"], "clients": num(r["clients"]),
+             "default_rate": num(r["default_rate"])})
+    for dim, items in demo.items():
+        if dim == "age_band":
+            items.sort(key=lambda i: AGE_ORDER.get(i["category"], 99))
+        else:
+            items.sort(key=lambda i: i["default_rate"], reverse=True)
+
+    monthly = sorted(
+        [{"date_key": num(r["date_key"]), "month_name": r["month_name"],
+          "default_rate": num(r["default_rate"]),
+          "exchange_rate_twd_usd": num(r["exchange_rate_twd_usd"]),
+          "real_broad_eer": num(r["real_broad_eer"]),
+          "total_reserves": num(r["total_reserves"])} for r in monthly_rows],
+        key=lambda r: r["date_key"])
+
+    return {"overall": overall, "corr": corr, "demo": demo, "monthly": monthly}
+
+
+def main() -> int:
+    data = {"etl": build_side("bigdata_etl"), "elt": build_side("bigdata_elt")}
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    html = (HTML_TEMPLATE
+            .replace("__DATA__", json.dumps(data, ensure_ascii=False))
+            .replace("__GENERATED__", dt.datetime.now().strftime("%Y-%m-%d %H:%M")))
+    OUT.write_text(html, encoding="utf-8")
+    print(f"Wrote {OUT.relative_to(BASE.parent)}  "
+          f"(etl months={len(data['etl']['monthly'])}, dims={list(data['etl']['demo'])})")
+    return 0
+
+
+HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
@@ -130,11 +220,11 @@
   <footer>
     Source: <code>dashboard/exports/bigdata_{etl,elt}__kpi_*.csv</code> ·
     ETL star schema vs ELT in-warehouse SQL · styled after the "Incident Report" card ·
-    offline static page (inline SVG, no dependencies) · generated 2026-06-18 11:38
+    offline static page (inline SVG, no dependencies) · generated __GENERATED__
   </footer>
 
 <script>
-const DATA = {"etl": {"overall": {"default_rate": 0.2212, "total_clients": 150000}, "corr": {"corr_fx": 0, "corr_reer": 0, "corr_reserves": 0}, "demo": {"education": [{"category": "university", "clients": 54000, "default_rate": 0.2504}, {"category": "high_school", "clients": 48631, "default_rate": 0.241}, {"category": "graduate_school", "clients": 30130, "default_rate": 0.2117}, {"category": "unknown", "clients": 12438, "default_rate": 0.0963}, {"category": "others", "clients": 4801, "default_rate": 0.0752}], "age_band": [{"category": "<30", "clients": 39898, "default_rate": 0.2089}, {"category": "30-39", "clients": 38558, "default_rate": 0.2106}, {"category": "40-49", "clients": 42456, "default_rate": 0.2451}, {"category": "50-59", "clients": 26958, "default_rate": 0.2222}, {"category": "60+", "clients": 2130, "default_rate": 0.1568}], "marriage": [{"category": "married", "clients": 52359, "default_rate": 0.2661}, {"category": "others", "clients": 9947, "default_rate": 0.2036}, {"category": "single", "clients": 81762, "default_rate": 0.1992}, {"category": "unknown", "clients": 5932, "default_rate": 0.1576}], "sex": [{"category": "female", "clients": 73941, "default_rate": 0.2439}, {"category": "male", "clients": 76059, "default_rate": 0.1991}]}, "monthly": [{"date_key": 200504, "month_name": "Apr", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.48, "real_broad_eer": 106.39, "total_reserves": 166563.28}, {"date_key": 200505, "month_name": "May", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.2652, "real_broad_eer": 107.87, "total_reserves": 171646.98}, {"date_key": 200506, "month_name": "Jun", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.3473, "real_broad_eer": 109.61, "total_reserves": 174112.78}, {"date_key": 200507, "month_name": "Jul", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.8855, "real_broad_eer": 109.75, "total_reserves": 174646.91}, {"date_key": 200508, "month_name": "Aug", "default_rate": 0.2212, "exchange_rate_twd_usd": 32.0757, "real_broad_eer": 108.39, "total_reserves": 174050.94}, {"date_key": 200509, "month_name": "Sep", "default_rate": 0.2212, "exchange_rate_twd_usd": 32.9248, "real_broad_eer": 105.43, "total_reserves": 175061.9}]}, "elt": {"overall": {"default_rate": 0.2212, "total_clients": 150000}, "corr": {"corr_fx": 0, "corr_reer": 0, "corr_reserves": 0}, "demo": {"marriage": [{"category": "married", "clients": 52359, "default_rate": 0.2661}, {"category": "others", "clients": 9947, "default_rate": 0.2036}, {"category": "single", "clients": 81762, "default_rate": 0.1992}, {"category": "unknown", "clients": 5932, "default_rate": 0.1576}], "age_band": [{"category": "<30", "clients": 39898, "default_rate": 0.2089}, {"category": "30-39", "clients": 38558, "default_rate": 0.2106}, {"category": "40-49", "clients": 42456, "default_rate": 0.2451}, {"category": "50-59", "clients": 26958, "default_rate": 0.2222}, {"category": "60+", "clients": 2130, "default_rate": 0.1568}], "education": [{"category": "university", "clients": 54000, "default_rate": 0.2504}, {"category": "high_school", "clients": 48631, "default_rate": 0.241}, {"category": "graduate_school", "clients": 30130, "default_rate": 0.2117}, {"category": "unknown", "clients": 12438, "default_rate": 0.0963}, {"category": "others", "clients": 4801, "default_rate": 0.0752}], "sex": [{"category": "female", "clients": 73941, "default_rate": 0.2439}, {"category": "male", "clients": 76059, "default_rate": 0.1991}]}, "monthly": [{"date_key": 200504, "month_name": "Apr", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.48, "real_broad_eer": 106.39, "total_reserves": 166563.27824}, {"date_key": 200505, "month_name": "May", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.2652, "real_broad_eer": 107.87, "total_reserves": 171646.98147}, {"date_key": 200506, "month_name": "Jun", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.3473, "real_broad_eer": 109.61, "total_reserves": 174112.7842599999}, {"date_key": 200507, "month_name": "Jul", "default_rate": 0.2212, "exchange_rate_twd_usd": 31.8855, "real_broad_eer": 109.75, "total_reserves": 174646.9129879999}, {"date_key": 200508, "month_name": "Aug", "default_rate": 0.2212, "exchange_rate_twd_usd": 32.0757, "real_broad_eer": 108.39, "total_reserves": 174050.942688}, {"date_key": 200509, "month_name": "Sep", "default_rate": 0.2212, "exchange_rate_twd_usd": 32.9248, "real_broad_eer": 105.43, "total_reserves": 175061.90286}]}};
+const DATA = __DATA__;
 const PALETTE = ["#FAE5F6","#EE4094","#BB015A"];
 const MACROS = [
   {key:"exchange_rate_twd_usd", label:"Exchange rate (TWD/USD)"},
@@ -346,3 +436,8 @@ renderAll();
 <style>@keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}</style>
 </body>
 </html>
+"""
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

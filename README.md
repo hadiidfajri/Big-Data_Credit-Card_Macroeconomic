@@ -14,11 +14,11 @@ Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive 
 | # | Syarat | Lokasi di repo |
 |---|--------|----------------|
 | 1 | Pipeline ETL & ELT | **ETL:** [etl_pipeline/extract.py](etl_pipeline/extract.py), [transform.py](etl_pipeline/transform.py), [load.py](etl_pipeline/load.py) · **ELT:** [elt_pipeline/extract_load.py](elt_pipeline/extract_load.py), [transform.sql](elt_pipeline/transform.sql), [run_transform.py](elt_pipeline/run_transform.py). *(Catatan: pipeline berupa script `.py`/`.sql` dijalankan via Docker — notebook Colab belum disertakan.)* |
-| 2 | Dokumentasi warehouse | **Schema/ERD:** [warehouse/erd_star_schema.png](warehouse/erd_star_schema.png), [warehouse/elt_lineage.png](warehouse/elt_lineage.png), [docs/ERD_DATABASE.pdf](docs/ERD_DATABASE.pdf) · **Struktur tabel (DDL):** [warehouse/etl_star_schema.sql](warehouse/etl_star_schema.sql) · **Query SQL analitik:** [warehouse/etl_analytical_queries.sql](warehouse/etl_analytical_queries.sql) |
+| 2 | Dokumentasi warehouse | **Schema/ERD:** [warehouse/erd_star_schema.png](warehouse/erd_star_schema.png) · **Struktur tabel (DDL):** [warehouse/etl_star_schema.sql](warehouse/etl_star_schema.sql) · **Query SQL analitik:** [warehouse/etl_analytical_queries.sql](warehouse/etl_analytical_queries.sql) |
 | 3 | Dashboard | **Web dashboard (self-contained):** [dashboard/web/index.html](dashboard/web/index.html) ([preview](dashboard/web/preview.png)) — buka langsung di browser |
-| 4 | Dokumentasi dataset | Bagian **Datasets** di bawah [docs/DOKUMENTASI_LENGKAP.pdf](docs/DOKUMENTASI_LENGKAP.pdf) |
+| 4 | Dokumentasi dataset | [docs/DOKUMENTASI_DATASET.md](docs/DOKUMENTASI_DATASET.md) · ringkas: bagian **Datasets** di bawah |
 | 5 | Script pengambilan data (API) | [etl_pipeline/extract.py](etl_pipeline/extract.py) (`extract_etl_source2` = FRED API JSON; `extract_etl_source1` = UCI)  §A1 |
-| 6 | Laporan paper | [report.pdf](report.pdf) (sumber: [report/report.md](report/report.md)) |
+| 6 | Laporan paper | [docs/DOKUMENTASI_LENGKAP.pdf](docs/DOKUMENTASI_LENGKAP.pdf) |
 | 7 | architecture_diagram.png | [architecture_diagram.png](architecture_diagram.png) |
 | 8 | README.md | berkas ini |
 
@@ -46,10 +46,10 @@ Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive 
 ├── raw/                 # raw extracted data for the ETL path (untouched)
 ├── datalake/            # raw landing zone for the ELT path
 ├── warehouse/           # star-schema DDL, 8 analytical queries, dashboard_kpis.sql, staging/
-├── dashboard/           # build_dashboard_kpis.py, HIVE_ODBC_CONNECTION.md, DASHBOARD_SPEC.md, screenshots/
-├── analysis/            # compare_pipelines.py + ETL_vs_ELT_comparison.md  (Part of §9)
-├── report/              # report.md skeleton (-> report.pdf)
-├── logs/                # pipeline_metrics.jsonl (cross-cutting, for the ETL-vs-ELT comparison)
+├── dashboard/           # build_dashboard_kpis.py, export_kpis_csv.py, build_web_dashboard.py, web/ (self-contained dashboard)
+├── analysis/            # compare_pipelines.py  (ETL-vs-ELT metrics, §9)
+├── docs/                # DOKUMENTASI_LENGKAP.pdf (laporan), DOKUMENTASI_DATASET.md
+├── logs/                # pipeline_metrics.jsonl (generated at run time; git-ignored)
 ├── docker/              # Dockerfile.spark, Dockerfile.hive (infra build files)
 ├── architecture_diagram.py / .pdf / .png   # data-flow diagram 
 ├── docker-compose.yml   # Kafka (KRaft) + Spark cluster + Hive warehouse
@@ -175,9 +175,8 @@ just open it in a browser. It embeds the KPI CSVs and has an **ETL/ELT toggle** 
 outputs (`bigdata_etl` / `bigdata_elt`) in one view — the two pipelines produce identical KPIs, itself
 evidence they agree. Static render: [dashboard/web/preview.png](dashboard/web/preview.png).
 
-Design spec: [dashboard/DASHBOARD_SPEC.md](dashboard/DASHBOARD_SPEC.md) /
-[dashboard/DASHBOARD_BUILD_GUIDE.md](dashboard/DASHBOARD_BUILD_GUIDE.md) (4 zones). Regenerate the page:
-`python dashboard/export_kpis_csv.py && python dashboard/build_web_dashboard.py` (see
+Regenerate the page (re-dump KPI CSVs from the warehouse, then rebuild the HTML):
+`python dashboard/export_kpis_csv.py && python dashboard/build_web_dashboard.py` (detail:
 [dashboard/web/README.md](dashboard/web/README.md)).
 
 ---
@@ -186,10 +185,11 @@ Design spec: [dashboard/DASHBOARD_SPEC.md](dashboard/DASHBOARD_SPEC.md) /
 
 | Artefak | Lokasi |
 |---|---|
-| Laporan paper (PDF) | [report.pdf](report.pdf) (sumber: [report/report.md](report/report.md)) — render ulang: `python report/build_report_pdf.py` |
+| Dokumentasi lengkap (laporan, PDF) | [docs/DOKUMENTASI_LENGKAP.pdf](docs/DOKUMENTASI_LENGKAP.pdf) |
+| Dokumentasi dataset | [docs/DOKUMENTASI_DATASET.md](docs/DOKUMENTASI_DATASET.md) |
 | Architecture diagram | [architecture_diagram.png](architecture_diagram.png) — `python architecture_diagram.py` |
 | ERD / star schema | [warehouse/erd_star_schema.png](warehouse/erd_star_schema.png) — `python warehouse/erd_diagram.py` |
-| Schema DDL + 8 query analitik | [warehouse/etl_star_schema.sql](warehouse/etl_star_schema.sql), [warehouse/etl_analytical_queries.sql](warehouse/etl_analytical_queries.sql) |
+| Schema DDL + query analitik | [warehouse/etl_star_schema.sql](warehouse/etl_star_schema.sql), [warehouse/etl_analytical_queries.sql](warehouse/etl_analytical_queries.sql) |
 
 ---
 
