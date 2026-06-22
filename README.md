@@ -190,10 +190,6 @@ Design spec: [dashboard/DASHBOARD_SPEC.md](dashboard/DASHBOARD_SPEC.md) /
 | Architecture diagram | [architecture_diagram.png](architecture_diagram.png) — `python architecture_diagram.py` |
 | ERD / star schema | [warehouse/erd_star_schema.png](warehouse/erd_star_schema.png) — `python warehouse/erd_diagram.py` |
 | Schema DDL + 8 query analitik | [warehouse/etl_star_schema.sql](warehouse/etl_star_schema.sql), [warehouse/etl_analytical_queries.sql](warehouse/etl_analytical_queries.sql) |
-| Dokumentasi lengkap (ID+EN, PDF) | [docs/DOKUMENTASI_LENGKAP.pdf](docs/DOKUMENTASI_LENGKAP.pdf), [docs/PROSES_ETL_ELT.pdf](docs/PROSES_ETL_ELT.pdf), [docs/CARA_MENJALANKAN.pdf](docs/CARA_MENJALANKAN.pdf) — render: `python docs/build_pdfs.py` |
-| Panduan hosting (Oracle Cloud, aman) | [docs/HOSTING_ORACLE.pdf](docs/HOSTING_ORACLE.pdf) |
-| Metode sintetis (CTGAN) | [synthetic/CTGAN_METHOD.md](synthetic/CTGAN_METHOD.md) |
-| Dashboard spec & build guide | [dashboard/DASHBOARD_SPEC.md](dashboard/DASHBOARD_SPEC.md), [dashboard/DASHBOARD_BUILD_GUIDE.md](dashboard/DASHBOARD_BUILD_GUIDE.md) |
 
 ---
 
