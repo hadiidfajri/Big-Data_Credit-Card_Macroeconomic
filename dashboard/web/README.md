@@ -9,7 +9,7 @@ web server, no Node, no internet** — just double-click `index.html`.
 - **ETL / ELT toggle** (top-right select): switches between the `bigdata_etl`
   (ETL) and `bigdata_elt` (ELT) warehouse outputs. The KPIs are identical, which
   is itself evidence the two pipelines agree. This web page **is** the dashboard
-  for the ELT side (in place of Power BI); Tableau covers the ETL side.
+  for both pipelines — visualization is **web-only** (no Power BI, no Tableau).
 - **Main card:** macro-composition area chart (Apr–Sep 2005), defaulting vs
   non-defaulting client counts, and highest/lowest-risk-group + default↔macro
   metric rows.
