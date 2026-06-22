@@ -13,11 +13,11 @@ Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive 
 
 | # | Syarat | Lokasi di repo |
 |---|--------|----------------|
-| 1 | Pipeline ETL & ELT | **ETL:** [etl_pipeline/extract.py](etl_pipeline/extract.py), [transform.py](etl_pipeline/transform.py), [load.py](etl_pipeline/load.py) · **ELT:** [elt_pipeline/extract_load.py](elt_pipeline/extract_load.py), [transform.sql](elt_pipeline/transform.sql), [run_transform.py](elt_pipeline/run_transform.py) · proses ber-gambar: [docs/PROSES_ETL_ELT.pdf](docs/PROSES_ETL_ELT.pdf). *(Catatan: pipeline berupa script `.py`/`.sql` dijalankan via Docker — notebook Colab belum disertakan.)* |
+| 1 | Pipeline ETL & ELT | **ETL:** [etl_pipeline/extract.py](etl_pipeline/extract.py), [transform.py](etl_pipeline/transform.py), [load.py](etl_pipeline/load.py) · **ELT:** [elt_pipeline/extract_load.py](elt_pipeline/extract_load.py), [transform.sql](elt_pipeline/transform.sql), [run_transform.py](elt_pipeline/run_transform.py). *(Catatan: pipeline berupa script `.py`/`.sql` dijalankan via Docker — notebook Colab belum disertakan.)* |
 | 2 | Dokumentasi warehouse | **Schema/ERD:** [warehouse/erd_star_schema.png](warehouse/erd_star_schema.png), [warehouse/elt_lineage.png](warehouse/elt_lineage.png), [docs/ERD_DATABASE.pdf](docs/ERD_DATABASE.pdf) · **Struktur tabel (DDL):** [warehouse/etl_star_schema.sql](warehouse/etl_star_schema.sql) · **Query SQL analitik:** [warehouse/etl_analytical_queries.sql](warehouse/etl_analytical_queries.sql) |
 | 3 | Dashboard | **Web dashboard (self-contained):** [dashboard/web/index.html](dashboard/web/index.html) ([preview](dashboard/web/preview.png)) — buka langsung di browser |
 | 4 | Dokumentasi dataset | Bagian **Datasets** di bawah [docs/DOKUMENTASI_LENGKAP.pdf](docs/DOKUMENTASI_LENGKAP.pdf) |
-| 5 | Script pengambilan data (API) | [etl_pipeline/extract.py](etl_pipeline/extract.py) (`extract_etl_source2` = FRED API JSON; `extract_etl_source1` = UCI) + penjelasan di [docs/PROSES_ETL_ELT.pdf](docs/PROSES_ETL_ELT.pdf) §A1 |
+| 5 | Script pengambilan data (API) | [etl_pipeline/extract.py](etl_pipeline/extract.py) (`extract_etl_source2` = FRED API JSON; `extract_etl_source1` = UCI)  §A1 |
 | 6 | Laporan paper | [report.pdf](report.pdf) (sumber: [report/report.md](report/report.md)) |
 | 7 | architecture_diagram.png | [architecture_diagram.png](architecture_diagram.png) |
 | 8 | README.md | berkas ini |
