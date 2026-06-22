@@ -4,7 +4,7 @@ Credit-card **default-risk analytics for Taiwan (2005)**, relating borrower beha
 macroeconomic environment (FRED Taiwan series). 
 
 Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive warehouse → Dashboard
-(Tableau/Power BI)**, di atas **Docker Compose**. Hasil run nyata: **150.000 nasabah sintetis (CTGAN)
+(Tableau + web)**, di atas **Docker Compose**. Hasil run nyata: **150.000 nasabah sintetis (CTGAN)
 → 900.000 baris fakta bulanan**, default rate **0,2212**.
 
 ---
@@ -15,7 +15,7 @@ Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive 
 |---|--------|----------------|
 | 1 | Pipeline ETL & ELT | **ETL:** [etl_pipeline/extract.py](etl_pipeline/extract.py), [transform.py](etl_pipeline/transform.py), [load.py](etl_pipeline/load.py) · **ELT:** [elt_pipeline/extract_load.py](elt_pipeline/extract_load.py), [transform.sql](elt_pipeline/transform.sql), [run_transform.py](elt_pipeline/run_transform.py) · proses ber-gambar: [docs/PROSES_ETL_ELT.pdf](docs/PROSES_ETL_ELT.pdf). *(Catatan: pipeline berupa script `.py`/`.sql` dijalankan via Docker — notebook Colab belum disertakan.)* |
 | 2 | Dokumentasi warehouse | **Schema/ERD:** [warehouse/erd_star_schema.png](warehouse/erd_star_schema.png), [warehouse/elt_lineage.png](warehouse/elt_lineage.png), [docs/ERD_DATABASE.pdf](docs/ERD_DATABASE.pdf) · **Struktur tabel (DDL):** [warehouse/etl_star_schema.sql](warehouse/etl_star_schema.sql) · **Query SQL analitik:** [warehouse/etl_analytical_queries.sql](warehouse/etl_analytical_queries.sql) |
-| 3 | Dashboard | **Screenshot/preview:** [dashboard/screenshots/dashboard_preview.png](dashboard/screenshots/dashboard_preview.png) · **Spesifikasi & panduan:** [dashboard/DASHBOARD_SPEC.md](dashboard/DASHBOARD_SPEC.md), [docs/PANDUAN_DASHBOARD_POWERBI.pdf](docs/PANDUAN_DASHBOARD_POWERBI.pdf). *(File `.pbix`/`.twbx` asli menyusul setelah dibangun di GUI.)* |
+| 3 | Dashboard | **Web dashboard (self-contained, ELT):** [dashboard/web/index.html](dashboard/web/index.html) ([preview](dashboard/web/preview.png)) — buka langsung di browser, tanpa server/ODBC · **Tableau (ETL):** [dashboard/DASHBOARD_SPEC.md](dashboard/DASHBOARD_SPEC.md), [dashboard/DASHBOARD_BUILD_GUIDE.md](dashboard/DASHBOARD_BUILD_GUIDE.md). *(File `.twbx` Tableau menyusul setelah dibangun di GUI.)* |
 | 4 | Dokumentasi dataset | Bagian **Datasets** di bawah [docs/DOKUMENTASI_LENGKAP.pdf](docs/DOKUMENTASI_LENGKAP.pdf) |
 | 5 | Script pengambilan data (API) | [etl_pipeline/extract.py](etl_pipeline/extract.py) (`extract_etl_source2` = FRED API JSON; `extract_etl_source1` = UCI) + penjelasan di [docs/PROSES_ETL_ELT.pdf](docs/PROSES_ETL_ELT.pdf) §A1 |
 | 6 | Laporan paper | [report.pdf](report.pdf) (sumber: [report/report.md](report/report.md)) |
@@ -63,7 +63,8 @@ Pipeline lengkap: **Extract (Kafka) → ETL (PySpark) / ELT (Hive SQL) → Hive 
 
 - **Docker Desktop** (with the WSL2 backend on Windows 11) — provides `docker compose`.
 - A free **FRED API key** — https://fred.stlouisfed.org/docs/api/api_key.html
--  **Power BI Desktop** (dashboard phase) with a **Hive ODBC** driver.
+- A modern **web browser** — the ELT dashboard ([dashboard/web/index.html](dashboard/web/index.html)) is fully
+  self-contained (no server, ODBC, or internet). *(Optional: **Tableau** + a **Hive ODBC** driver for the ETL view.)*
 - *(Optional)* local **Python 3.11** if you want to run scripts outside the containers.
 
 ---
@@ -94,7 +95,7 @@ docker compose ps
 | Spark master UI  | http://localhost:8080           | cluster status — should show **1 worker** |
 | Spark master     | `spark://localhost:7077`        | submit jobs to the cluster                |
 | Hive metastore   | `thrift://localhost:9083`       | table metadata (Spark connects here)      |
-| HiveServer2      | `localhost:10000`               | JDBC/ODBC — Tableau & Power BI connect here|
+| HiveServer2      | `localhost:10000`               | JDBC/ODBC — Tableau (ETL view) connects here|
 | HiveServer2 UI   | http://localhost:10002          | query / session monitoring                |
 | Postgres         | internal                        | Hive metastore backing DB                 |
 
@@ -168,11 +169,18 @@ python architecture_diagram.py    # diagram renders fine on the host (matplotlib
 
 ## Dashboards
 
-Both tools render the **same dashboard design** over **Hive ODBC** (`localhost:10000`):
-**Tableau → ETL** warehouse output, **Power BI → ELT** warehouse output. Artifacts go in `dashboard/`.
+The **same dashboard design** is delivered two ways:
 
-Step-by-step build instructions: [dashboard/DASHBOARD_BUILD_GUIDE.md](dashboard/DASHBOARD_BUILD_GUIDE.md)
-(4 zones, ODBC + CSV fallback). No-ODBC export: `python dashboard/export_kpis_csv.py`.
+- **Web dashboard → ELT** warehouse output — a fully **self-contained** page at
+  [dashboard/web/index.html](dashboard/web/index.html): no web server, no ODBC, no internet, just open it
+  in a browser. It embeds the KPI CSVs and has an **ETL/ELT toggle** (the two pipelines produce identical
+  KPIs — itself evidence they agree). Static render: [dashboard/web/preview.png](dashboard/web/preview.png).
+- **Tableau → ETL** warehouse output — over **Hive ODBC** (`localhost:10000`).
+
+Tableau build instructions: [dashboard/DASHBOARD_BUILD_GUIDE.md](dashboard/DASHBOARD_BUILD_GUIDE.md)
+(4 zones, ODBC + CSV fallback). No-ODBC export: `python dashboard/export_kpis_csv.py`. Regenerate the web
+page: `python dashboard/export_kpis_csv.py && python dashboard/build_web_dashboard.py` (see
+[dashboard/web/README.md](dashboard/web/README.md)).
 
 ---
 
